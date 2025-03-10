@@ -1,0 +1,28 @@
+name: Auto Deploy to Server
+
+on:
+  push:
+    branches:
+      - master  # Faqat `main` branch push bo'lganda ishga tushadi
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/startUp/  # Loyihangiz joylashgan papkaga kiring
+            git pull origin master  # Yangi kodni yuklab oling
+            mvn clean package -DskipTests  # Java proyektni build qilish
+            pkill -f 'edu_app.jar' || true  # Avvalgi jar jarayonini o'chirish
+            nohup java -jar target/edu_app.jar > app.log 2>&1 &  # Yangi buildni ishga tushirish
+

@@ -51,6 +51,7 @@ public class SecurityConfig {
                                     "/user/**",
                                     "/subject/**",
                                     "/groups/**",
+                                    "/test/**",
                                     "/swagger-ui.html",
                                     "/webjars/**",
                                     "/v3/api-docs/**")

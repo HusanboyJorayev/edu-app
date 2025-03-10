@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info = @Info(
-                title = "Logistic APIs", // Optional: Qo'shimcha ma'lumot berish uchun
+                title = "EDU APIs", // Optional: Qo'shimcha ma'lumot berish uchun
                 version = "2.0", // OpenAPI versiyasi noto'g'ri emas, faqat ma'lumot sifatida
                 description = "API Documentation"
         ),
         servers = {
-                @Server(url = "http://localhost:9876", description = "Local Server")
-                //@Server(url = "https://api.logistx.uz", description = "Prod Server")
+                @Server(url = "http://localhost:9876", description = "Local Server"),
+                @Server(url = "http://8.219.160.15:8080", description = "Prod Server")
         },
         security = @SecurityRequirement(name = "bearerAuth") // Apply globally
 )
