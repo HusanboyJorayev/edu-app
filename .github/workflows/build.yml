@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # yoki deploy qilmoqchi bo'lgan branch nomi
+      - master
 
 jobs:
   deploy:
@@ -20,9 +20,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /root/startUp/  # Serverdagi ishchi papka
-            git pull origin main  # Kodni yangilash
-            docker-compose up -d --build  # Agar Docker ishlatayotgan bo'lsangiz
-            systemctl restart myapp  # Agar servis sifatida ishlasa, servisini qayta yuklash
+            cd /root/startUp/
+            git pull origin master
+            systemctl restart myapp
+
 
 
